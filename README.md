@@ -9,6 +9,12 @@ Load Chrome extension from https://chromewebstore.google.com/detail/youtube-live
 
 ![Chrome](https://img.shields.io/badge/Chrome-116%2B-4285F4) ![Manifest](https://img.shields.io/badge/Manifest-V3-2ea44f) ![Version](https://img.shields.io/badge/version-1.6.0-blue)
 
+## Demo
+
+A short clip showing the extension translating live audio in real time:
+
+<video src="./Demo.mp4" controls width="100%" poster="icons/icon128.png"></video>
+
 ## Features
 
 - **Real-time speech translation** of the active tab's audio (e.g. a YouTube video) into

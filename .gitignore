@@ -1,6 +1,7 @@
 # Dev / packaging artifacts not part of the source tree
 *.zip
 *.mp4
+!Demo.mp4
 *.bak.png
 node_modules/
 .DS_Store
