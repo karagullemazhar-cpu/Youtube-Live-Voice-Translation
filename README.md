@@ -5,6 +5,8 @@ captures the audio of the currently active tab and translates it live into Turki
 your chosen target language, using either **Google Gemini Live** or **Alibaba Cloud
 Model Studio (Qwen3.5 LiveTranslate)** as the streaming translation backend.
 
+Load Chrome extension from https://chromewebstore.google.com/detail/youtube-live-voice-transl/clhnemjdfadiidfhlgagkogdbcdahjkm?authuser=0&hl=en
+
 ![Chrome](https://img.shields.io/badge/Chrome-116%2B-4285F4) ![Manifest](https://img.shields.io/badge/Manifest-V3-2ea44f) ![Version](https://img.shields.io/badge/version-1.6.0-blue)
 
 ## Features
