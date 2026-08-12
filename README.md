@@ -13,7 +13,11 @@ Load Chrome extension from https://chromewebstore.google.com/detail/youtube-live
 
 A short clip showing the extension translating live audio in real time:
 
-<video src="./Demo.mp4" controls width="100%" poster="icons/icon128.png"></video>
+<p align="center">
+  <img src="./demo-thumb.png" alt="Youtube Live Voice Translation demo" width="720" />
+</p>
+
+<video src="./Demo.mp4" controls width="100%" poster="demo-thumb.png"></video>
 
 ## Features
 
