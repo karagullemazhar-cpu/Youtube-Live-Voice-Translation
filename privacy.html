@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Youtube Live Voice Translation Gizlilik Politikası</title>
+  <link rel="stylesheet" href="privacy.css">
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Sürüm 1.5.0 · Son güncelleme: 4 Ağustos 2026</p>
+    <h1>Youtube Live Voice Translation Gizlilik Politikası</h1>
+    <p class="lead">
+      Youtube Live Voice Translation, yalnızca kullanıcının açıkça seçtiği sekmenin sesini gerçek zamanlı çevirmek için çalışır.
+      Uzantı bağımsız bir üçüncü taraf ürünüdür; Google veya Alibaba tarafından geliştirilmiş, desteklenmiş ya da onaylanmış değildir.
+    </p>
+
+    <h2>Tek amaç</h2>
+    <p>
+      Uzantının tek amacı, kullanıcının açıkça seçtiği aktif sekmenin sesini kullanıcının seçtiği Gemini Live veya
+      Qwen LiveTranslate uyumlu API hizmetiyle gerçek zamanlı çevirmek; çevrilmiş sesi ve transkriptleri kullanıcıya
+      göstermektir. Uzantı reklam, analiz, gezinme takibi, sayfa içeriği toplama veya bu amaç dışında bir özellik çalıştırmaz.
+    </p>
+
+    <h2>İşlenen veriler</h2>
+    <ul>
+      <li>Çeviri başlatıldığında seçili sekmeden yakalanan ses.</li>
+      <li>Seçili sağlayıcının ürettiği orijinal ve çevrilmiş transkriptler.</li>
+      <li>Kullanıcının girdiği Gemini veya Qwen API anahtarı.</li>
+      <li>Kaynak/hedef dil, model ve ses seviyesi gibi uzantı tercihleri.</li>
+      <li>Yalnızca yakalanabilir bir sayfa olduğunu doğrulamak için aktif sekmenin URL şeması.</li>
+    </ul>
+
+    <h2>Verilerin kullanım amacı ve paylaşımı</h2>
+    <p>
+      Kullanıcı “Kabul et ve başlat” düğmesine bastığında sekme sesi ve çeviri transkriptleri yalnızca seçilen
+      çeviri hizmetinin sağlanması amacıyla doğrudan ilgili API hizmetine gönderilir:
+    </p>
+    <ul>
+      <li><strong>Sabit resmî Google Gemini Live API endpointi</strong>, kullanıcı Gemini modelini seçtiğinde.</li>
+      <li><strong>Sabit Alibaba Cloud Model Studio Singapur Qwen LiveTranslate API endpointi</strong>, kullanıcı Qwen modelini seçtiğinde.</li>
+    </ul>
+    <p>
+      API anahtarı yalnızca seçilen sağlayıcıda kimlik doğrulaması yapmak için kullanılır. Uzantı geliştiricisinin
+      işlettiği bir sunucuya ses, transkript, API anahtarı veya gezinme verisi gönderilmez. Veriler reklam,
+      profilleme, kredi değerlendirmesi veya satış amacıyla kullanılmaz ve reklam ağları ya da veri brokerlarıyla paylaşılmaz.
+    </p>
+
+    <h2>Saklama ve güvenlik</h2>
+    <ul>
+      <li>Gemini ve Qwen API anahtarları <code>chrome.storage.local</code> içinde, yalnız güvenilir uzantı bağlamlarının erişebileceği şekilde bu cihazda saklanır.</li>
+      <li>API anahtarları kullanıcı değiştirene, “Tüm yerel ayarları ve oturum verilerini sil” düğmesine basana veya uzantıyı kaldırana kadar korunur.</li>
+      <li>Transkriptler ve çalışma durumu yalnızca <code>chrome.storage.session</code> içinde tutulur ve tarayıcı yeniden başlatıldığında silinir.</li>
+      <li>Ham ses uzantı tarafından diske kaydedilmez.</li>
+      <li>Kaynak/hedef dil, model ve ses seviyeleri gibi tercihler yerel uzantı depolamasında tutulur.</li>
+      <li>API bağlantıları WSS/TLS ile şifrelenir. Chrome bağlantı iznini kullanıcı başlattığında Gemini için yalnız Google API alanı, Qwen için yalnız sabit Alibaba Cloud Singapur API alanı adına ister.</li>
+    </ul>
+
+    <h2>Kullanıcı kontrolü ve silme</h2>
+    <p>
+      Ses aktarımı yalnızca kullanıcı her başlatma öncesinde görünür veri açıklamasını kabul edip düğmeye bastığında başlar.
+      “Durdur” düğmesi ses yakalamayı ve sağlayıcı bağlantısını kapatır. “Tüm yerel ayarları ve oturum verilerini sil”
+      düğmesi API anahtarlarını, transkriptleri, çalışma durumunu ve tercihleri temizler. Uzantının kaldırılması da uzantıya ait yerel verileri siler.
+    </p>
+
+    <h2>Chrome izinlerinin gerekçeleri</h2>
+    <ul>
+      <li><code>tabCapture</code>: Yalnız kullanıcı başlattığında seçili sekmenin sesini çeviri için yakalamak.</li>
+      <li><code>activeTab</code>: Kullanıcının seçtiği aktif sekmeyi belirlemek ve sekmenin yakalanabilir bir HTTP/HTTPS sayfası olduğunu doğrulamak.</li>
+      <li><code>offscreen</code>: Popup kapandıktan sonra Web Audio işlemesini, sağlayıcı WebSocket bağlantısını ve çevrilmiş ses oynatmayı sürdürmek.</li>
+      <li><code>storage</code>: Tercihleri ve API anahtarlarını güvenilir uzantı bağlamlarıyla sınırlı cihaz depolamasında; transkriptleri ve çalışma durumunu yalnız tarayıcı oturumunda saklamak.</li>
+      <li><code>declarativeNetRequestWithHostAccess</code>: Qwen seçildiğinde Bearer kimlik doğrulama başlığını yalnız uzantının başlattığı, kullanıcının izin verdiği Qwen WebSocket bağlantısına eklemek.</li>
+      <li>Opsiyonel sabit host kapsamları: Yalnız <code>generativelanguage.googleapis.com</code> ve <code>dashscope-intl.aliyuncs.com</code> için bağlantı izni istemek. Bu izinler kurulum sırasında verilmez; kullanıcı ilgili modeli başlattığında yalnız o sağlayıcının alan adı için istenir.</li>
+    </ul>
+    <p>
+      Uzantı içerik betiği kullanmaz, ziyaret edilen sayfanın metnini veya DOM içeriğini okumaz ve izinleri arka planda
+      kendiliğinden istemez. Sekme sesi aktarımı yalnız kullanıcının görünür veri açıklamasını kabul ederek başlattığı çeviri oturumunda gerçekleşir.
+    </p>
+
+    <h2>Üçüncü taraf koşulları</h2>
+    <p>
+      Google veya Alibaba, kendi hizmetinde aldığı verileri kendi gizlilik,
+      saklama, güvenlik, kota ve ücretlendirme koşullarına göre işleyebilir. Kullanıcı ilgili hizmetin koşullarını incelemelidir:
+    </p>
+    <ul>
+      <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Gizlilik Politikası</a></li>
+      <li><a href="https://www.alibabacloud.com/help/en/legal/latest/alibaba-cloud-international-website-privacy-policy" target="_blank" rel="noopener noreferrer">Alibaba Cloud Gizlilik Politikası</a></li>
+    </ul>
+
+    <h2>Limited Use beyanı</h2>
+    <p>
+      Google API’lerinden alınan bilgilerin kullanımı, Limited Use gereklilikleri dâhil olmak üzere
+      Chrome Web Store Kullanıcı Verileri Politikası’na uygun olacaktır. Uzantı yalnızca açıklanan tek amacı olan
+      gerçek zamanlı sekme sesi çevirisini sağlamak için gerekli verileri işler.
+    </p>
+
+    <h2>Paket ve kod güvenliği</h2>
+    <p>
+      Çalıştırılabilir JavaScript kodunun tamamı uzantı paketinin içindedir. Uzantı uzak sunuculardan JavaScript veya
+      WebAssembly indirip çalıştırmaz; çeviri API’lerinden yalnız çeviri oturumu için gereken ses, metin ve durum verilerini alır.
+    </p>
+
+    <h2>İletişim ve değişiklikler</h2>
+    <p>
+      Gizlilik soruları için Chrome Web Store listelemesindeki geliştirici iletişim veya Destek kanalı kullanılabilir.
+      Veri işleme uygulamaları değişirse politika ve uzantı içi açıklama, yeni uygulama başlamadan önce güncellenir.
+    </p>
+  </main>
+</body>
+</html>

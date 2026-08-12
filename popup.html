@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Youtube Live Voice Translation</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div class="logo" aria-hidden="true">YT</div>
+      <div>
+        <h1 data-i18n="appTitle">Youtube Live Voice Translation</h1>
+        <p id="providerText">Gemini Live · gerçek zamanlı sesli çeviri</p>
+      </div>
+    </header>
+
+    <section class="panel">
+      <label for="model" data-i18n="modelLabel">Çeviri modeli</label>
+      <select id="model">
+        <option value="gemini-3.5-live-translate-preview">Gemini 3.5 Live Translate Preview</option>
+        <option value="qwen3.5-livetranslate-flash-realtime">Qwen 3.5 LiveTranslate Flash Realtime</option>
+      </select>
+    </section>
+
+    <section class="panel">
+      <label for="apiKey" id="apiKeyLabel">Gemini API anahtarı</label>
+      <div class="key-row">
+        <input type="password" id="apiKey" autocomplete="off" spellcheck="false" placeholder="Google AI Studio API anahtarı">
+        <button id="toggleKey" class="icon-btn" type="button" title="Anahtarı göster/gizle">Göster</button>
+      </div>
+      <small id="apiKeyHint">Anahtar bu cihazda yalnız güvenilir uzantı bağlamlarının erişebildiği depolamada saklanır.</small>
+    </section>
+
+    <section class="grid">
+      <div class="field">
+        <label for="sourceLang" data-i18n="sourceLanguage">Kaynak dil</label>
+        <select id="sourceLang" disabled>
+          <option value="auto">Otomatik algılanır (Gemini)</option>
+          <option value="tr">Türkçe</option>
+          <option value="en">İngilizce</option>
+          <option value="de">Almanca</option>
+          <option value="fr">Fransızca</option>
+          <option value="es">İspanyolca</option>
+          <option value="it">İtalyanca</option>
+          <option value="pt">Portekizce</option>
+          <option value="nl">Felemenkçe</option>
+          <option value="pl">Lehçe</option>
+          <option value="ru">Rusça</option>
+          <option value="uk">Ukraynaca</option>
+          <option value="ar">Arapça</option>
+          <option value="fa">Farsça</option>
+          <option value="hi">Hintçe</option>
+          <option value="bn">Bengalce</option>
+          <option value="id">Endonezce</option>
+          <option value="vi">Vietnamca</option>
+          <option value="th">Tayca</option>
+          <option value="zh">Çince</option>
+          <option value="ja">Japonca</option>
+          <option value="ko">Korece</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="targetLang" data-i18n="targetLanguage">Hedef dil</label>
+        <select id="targetLang">
+          <option value="tr">Türkçe</option>
+          <option value="en">İngilizce</option>
+          <option value="de">Almanca</option>
+          <option value="fr">Fransızca</option>
+          <option value="es">İspanyolca</option>
+          <option value="it">İtalyanca</option>
+          <option value="pt">Portekizce</option>
+          <option value="nl">Felemenkçe</option>
+          <option value="pl">Lehçe</option>
+          <option value="ru">Rusça</option>
+          <option value="uk">Ukraynaca</option>
+          <option value="ar">Arapça</option>
+          <option value="fa">Farsça</option>
+          <option value="hi">Hintçe</option>
+          <option value="bn">Bengalce</option>
+          <option value="id">Endonezce</option>
+          <option value="vi">Vietnamca</option>
+          <option value="th">Tayca</option>
+          <option value="zh">Çince</option>
+          <option value="ja">Japonca</option>
+          <option value="ko">Korece</option>
+        </select>
+      </div>
+    </section>
+
+    <div id="qwenOutputHint" class="notice warning" hidden></div>
+
+    <section class="panel levels">
+      <div class="level">
+        <div><label for="originalVolume" data-i18n="originalAudio">Orijinal ses</label><output id="originalVolumeText">15%</output></div>
+        <input type="range" id="originalVolume" min="0" max="1" step="0.05" value="0.15">
+      </div>
+      <div class="level">
+        <div><label for="translatedVolume" data-i18n="translatedAudio">Çeviri sesi</label><output id="translatedVolumeText">100%</output></div>
+        <input type="range" id="translatedVolume" min="0" max="1" step="0.05" value="1">
+      </div>
+    </section>
+
+    <section class="disclosure" aria-labelledby="dataUseTitle">
+      <strong id="dataUseTitle" data-i18n="dataUse">Veri kullanımı</strong>
+      <p data-i18n="dataDisclosure">
+        Başlattığınızda seçili sekmenin sesi ve oluşan transkriptler yalnızca seçtiğiniz çeviri API hizmetine gönderilir.
+        Gemini sabit resmî Google Live API adresini, Qwen sabit Alibaba Cloud Singapur adresini kullanır. API anahtarları
+        bu cihazda yalnız güvenilir uzantı bağlamlarının erişebildiği depolamada saklanır ve sadece kimlik doğrulaması için
+        kullanılır. Geliştiricinin sunucusuna veri gönderilmez.
+      </p>
+      <label class="consent-row" for="dataConsent">
+        <input type="checkbox" id="dataConsent">
+        <span data-i18n="consent">Bu veri aktarımını anladım ve çeviriyi başlatmayı kabul ediyorum.</span>
+      </label>
+      <a id="privacyLink" href="https://gist.github.com/karagullemazhar-cpu/8eff3050518ef147885a193373bb9686" target="_blank" rel="noopener noreferrer" data-i18n="privacy">Gizlilik Politikası</a>
+    </section>
+
+    <div class="buttons">
+      <button id="startBtn" class="primary" type="button" disabled data-i18n="start">▶ Kabul et ve başlat</button>
+      <button id="stopBtn" class="danger" type="button" disabled data-i18n="stop">■ Durdur</button>
+    </div>
+
+    <div id="status" class="status idle" role="status" aria-live="polite">
+      <span class="dot"></span>
+      <span id="statusText">Hazır</span>
+    </div>
+    <div id="errorBox" class="error" role="alert" hidden></div>
+
+    <section class="transcripts">
+      <div>
+        <span data-i18n="original">ORİJİNAL</span>
+        <p id="inputTranscript">—</p>
+      </div>
+      <div>
+        <span data-i18n="translation">ÇEVİRİ</span>
+        <p id="outputTranscript">—</p>
+      </div>
+    </section>
+
+    <footer>
+      <p data-i18n="disclaimer">Bağımsız bir üçüncü taraf uzantısıdır; Google veya Alibaba tarafından geliştirilmiş ya da onaylanmış değildir.</p>
+      <button id="resetBtn" class="link-btn" type="button" data-i18n="reset">Tüm yerel ayarları ve oturum verilerini sil</button>
+    </footer>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
